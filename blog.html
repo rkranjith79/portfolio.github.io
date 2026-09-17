@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Blog — Ranjith Kumar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Patrick+Hand&family=Shadows+Into+Light&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="notebook.css" />
+</head>
+<body>
+
+<div class="spiral"></div>
+<button id="themeToggle" class="theme-toggle" aria-label="Toggle dark or light theme">🌙</button>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><span class="dot"></span>Ranjith<span>Kumar</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="hobby.html">Hobbies</a>
+      <a href="contact.html" class="nav-cta">Hire me</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <div class="page-head">
+    <span class="eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>the thoughts section</span>
+    <h1>Scratched <em>notes</em>.</h1>
+    <p class="lead">
+      One page at a time. The latest note is written out below; the rest of the
+      scratchpad is still being scribbled.
+    </p>
+  </div>
+
+  <section class="article">
+    <span class="date">Sept 12, 2026</span>
+    <span class="cat">debugging</span><span class="cat">3 min</span>
+    <h2>Two hours of debugging, and it was one line</h2>
+    <p>
+      A timer on a client dashboard kept running an hour late — but only for
+      users on the night shift. Same code, same inputs, and yet once the clock
+      passed 11pm everything quietly drifted.
+    </p>
+    <p>
+      I blamed caching first (no). Then the queue worker (also no). Then
+      Laravel's scheduler (closer, but still no). I added logs, replayed the
+      flow by hand, and finally rebuilt the exact sequence in a test with a
+      user in the Asia/Kolkata timezone.
+    </p>
+    <p>
+      It was timezone math — it's always timezone math. The app stored timestamps
+      in UTC but rendered the daily window in local time, and the subtraction was
+      applied after the offset. So the slice silently shifted by an hour, and only
+      ever surfaced on days where the timer crossed midnight.
+    </p>
+    <p>Three things I check first before I touch a time bug again:</p>
+    <ol>
+      <li>Store UTC, display local, and never convert twice in the same flow.</li>
+      <li>Are my "same inputs" actually the same? Midnight boundaries hide differences for most of the day.</li>
+      <li>Can I reproduce it outside production? A one-line test with a specific <code>timezone</code> beat two hours of staring.</li>
+    </ol>
+    <p class="sign">— written so future me doesn't lose the same two hours.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Scratchpad — coming soon</h2>
+      <p class="sec-sub">the next pages of this notebook</p>
+    </div>
+    <div class="blog-list">
+
+      <div class="blog-post soon">
+        <span class="date">Aug 30, 2026</span>
+        <span class="cat">shipping</span>
+        <h3>Shipping small: how I stopped rewriting everything</h3>
+        <span class="soon-tag">coming soon</span>
+      </div>
+
+      <div class="blog-post soon">
+        <span class="date">Aug 2, 2026</span>
+        <span class="cat">laravel</span>
+        <h3>Production notes from running a low-code platform</h3>
+        <span class="soon-tag">coming soon</span>
+      </div>
+
+      <div class="blog-post soon">
+        <span class="date">Jul 14, 2026</span>
+        <span class="cat">craft</span>
+        <h3>Why my terminal theme is basically a notebook</h3>
+        <span class="soon-tag">coming soon</span>
+      </div>
+
+      <div class="blog-post soon">
+        <span class="date">Jun 20, 2026</span>
+        <span class="cat">work</span>
+        <h3>Code review, kindly: a template I reuse</h3>
+        <span class="soon-tag">coming soon</span>
+      </div>
+
+      <div class="blog-post soon">
+        <span class="date">May 5, 2026</span>
+        <span class="cat">life</span>
+        <h3>I wrote my own price tracker (again)</h3>
+        <span class="soon-tag">coming soon</span>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg> Made on grid paper · Ranjith Kumar Murugesan · too much coffee
+</footer>
+
+<script src="theme.js"></script>
+</body>
+</html>
